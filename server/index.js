@@ -77,10 +77,15 @@ app.listen(port, () => {
 // Authenticate the account, and otherwise check that it's a valid transaction
 function isValidTransaction(sender, recipient, amount, message, senderPrivateKey, senderSignature) {
   const isValidAmount = amount >= 0;
-  const isValidSender = sender in balances;  console.log('isValidSender: ' + isValidSender);
-  const isValidBalance = amount <= balances[sender];  console.log('isValidAmount: ' + isValidAmount + ' amount:' + amount + ' balances[sender]: ' + balances[sender]);
-  const isValidPrivateKey = senderPrivateKey === accounts[sender].privateKey;  console.log('isValidPrivateKey: ' + isValidPrivateKey); console.log('senderPrivateKey: ' + senderPrivateKey + ' accounts[sender].privateKey:' + accounts[sender].privateKey);
-  const isValidSignature = secp.verify(senderSignature, SHA256(message).toString(), accounts[sender].publicKey); console.log('senderSignature: ' + senderSignature + ' messageHash: ' + SHA256(message).toString() + ' sender: ' + sender); console.log('isValidSignature: ' + isValidSignature);
+  const isValidSender = sender in balances;  
+  const isValidBalance = amount <= balances[sender];  
+  const isValidPrivateKey = senderPrivateKey === accounts[sender].privateKey;  
+  const isValidSignature = secp.verify(senderSignature, SHA256(message).toString(), accounts[sender].publicKey); 
+
+  // console.log('isValidSender: ' + isValidSender);
+  // console.log('isValidAmount: ' + isValidAmount + ' amount:' + amount + ' balances[sender]: ' + balances[sender]);
+  // console.log('isValidPrivateKey: ' + isValidPrivateKey); console.log('senderPrivateKey: ' + senderPrivateKey + ' accounts[sender].privateKey:' + accounts[sender].privateKey);
+  // console.log('senderSignature: ' + senderSignature + ' messageHash: ' + SHA256(message).toString() + ' sender: ' + sender); console.log('isValidSignature: ' + isValidSignature);
 
   return isValidAmount && isValidSender && isValidBalance && (isValidPrivateKey || isValidSignature); 
 }

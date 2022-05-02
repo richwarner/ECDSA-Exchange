@@ -63,4 +63,6 @@ document.getElementById("recipient").addEventListener('keyup', updateMessage);
 
 function updateMessage() {
   document.getElementById("message").value = `Send ${document.getElementById("send-amount").value} to ${document.getElementById("recipient").value}`; 
+  document.getElementById("sign-signature-result").value = "";
+  document.getElementById("sender-signature").value = "";
 }
